@@ -3379,7 +3379,7 @@ img { max-width: 100%; vertical-align: bottom; }
 
 .nav-extended .sign-in-nav .btn:hover, .nav-extended .sign-in-nav .btn-large:hover { background-color: #ff2424; }
 
-.nav-extended .log-out-nav .log-out-link { color: #4054B2; margin-left: 600px; }
+.nav-extended .log-out-nav .log-out-link { color: #4054B2; margin-left: 300px; }
 
 .nav-extended .log-out-nav .btn, .nav-extended .log-out-nav .btn-large { padding-right: 15px; padding-left: 15px; color: #FFF; background-color: red; }
 
