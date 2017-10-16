@@ -1,4 +1,4 @@
-module_name: modules.coursebuilder-student-dashboard.student-dashboard
+module_name: modules.coursebuilder-student-dashboard.student_dashboard
 module_uri: https://github.com/andela-iakande/coursebuilder-student-dashboard
 module_version: 1.0.1
 container_version: 1.8.0-d2467e99e5a4
