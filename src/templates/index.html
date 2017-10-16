@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <!--Import Google Icon Font-->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+
+    <link rel="stylesheet" href="/modules/coursebuilder-student-dashboard/_static/css/style.css" media="screen,projection">
+
+    <script src="/static/polymer-1.2.0/webcomponentsjs/webcomponents-lite.js"></script>
+    {% if use_flattened_html_imports %}
+        <link rel="import" href="/static/html-imports/explorer-imports.html">
+    {% endif %}
+    <link rel="import" href="/modules/coursebuilder-student-dashboard/_static/student-dashboard.html">
+</head>
+<body>
+
+<!-- Student Dashboard -->
+    <student-dashboard></student-dashboard>
+
+<!--  Footer  -->
+<footer>
+    <div class="card footer-top">
+        <div class="row">
+            <div class="col l6 m12">
+                <img src="/modules/coursebuilder-student-dashboard/_static/images/logo.png" alt="Google" aria-label="Google" draggable="false">
+                <p>A Growth Engine for Digital Skills</p>
+            </div>
+
+            <div class="col l3 m12 footer-privacy">
+                <a href="https://www.google.co.uk/intl/en/policies/privacy/?fg=1" class="gbl-footer__link"
+                   target="_blank">
+                    <span class="tiny-text">Privacy &amp; Terms</span>
+                </a>
+            </div>
+
+            <div class="col l3 m12">
+                <select aria-label="Choose another locale" class="browser-default">
+                  <option value="https://courses.academy.africa/">
+                    Africa
+                  </option>
+                </select>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer-bottom">
+        <div class="row">
+            <div class="col l8 m12 s12 footer-appstores">
+                <div class="col s8">
+                <a target="_blank" href="https://codeforafrica.org/">
+                    <img class="store cfa-footer-logo" src="/modules/coursebuilder-student-dashboard/_static/images/powered-by-gray.png">
+                </a>
+                </div>
+
+                <div class="col s12 footer-captions">
+                    <p>The StoryLab Academy is an initiative of <a href="https://codeforafrica.org/" target="_blank">Code for Africa</a></p>
+                    <p>in partnership with the <a href="https://newslab.withgoogle.com/" target="_blank">Google News Lab</a> and the <a href="http://worldbank.org/" target="_blank">World Bank</a>.</p>
+                </div>
+
+            </div>
+
+            <div class="col l4 m12 footer-social-icons">
+                <br>
+                <a target="_blank" href="#!homepage">Home
+                </a>
+                <br>
+                <a target="_blank" href="#!feedback">Contact Us
+                </a>
+                <br>
+                <a target="_blank" href="#!explorer">Courses
+                </a>
+            </div>
+        </div>
+    </div>
+</footer>
+
+
+<!--Import jQuery before materialize.js-->
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+<script type="text/javascript" src="/modules/coursebuilder-student-dashboard/_static/js/materialize.min.js"></script>
+<script src="/modules/coursebuilder-student-dashboard/_static/js/owl.carousel.min.js"></script>
+<script src="/modules/coursebuilder-student-dashboard/_static/js/main.js"></script>
+
+<!-- Global Site Tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-44795600-39"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag() {
+    dataLayer.push(arguments)
+  };
+  gtag('js', new Date());
+  gtag('config', 'UA-44795600-39');
+</script>
+
+</body>
+</html>

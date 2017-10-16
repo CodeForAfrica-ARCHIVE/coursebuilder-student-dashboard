@@ -1,0 +1,9 @@
+module_name: modules.coursebuilder-student-dashboard.student-dashboard
+module_uri: https://github.com/andela-iakande/coursebuilder-student-dashboard
+module_version: 1.0.1
+container_version: 1.8.0-d2467e99e5a4
+description: Example of Course Builder modules
+license: Apache 2.0
+tests:
+  tests.ext.coursebuilder-student-dashboard.functional_tests.GlobalHandlerTest: 2
+  tests.ext.coursebuilder-student-dashboard.functional_tests.NamespacedHandlerTest: 2
