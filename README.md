@@ -39,6 +39,7 @@ Next: create a file titled install.sh. For instance, you can place the file in y
   cat modules/coursebuilder-student-dashboard/gql.py > modules/gql/gql.py
   cat modules/coursebuilder-student-dashboard/top-bar.html > modules/explorer/_static/components/top-bar/top-bar.html
   rm -f modules/coursebuilder-student-dashboard/gql.py
+  rm -f modules/coursebuilder-student-dashboard/top-bar.html
 ```
 After this process, 
 next run:
@@ -111,6 +112,7 @@ your desktop, copy and paste the script below into it.
   cat modules/coursebuilder-student-dashboard/gql.py > modules/gql/gql.py
   cat modules/coursebuilder-student-dashboard/top-bar.html > modules/explorer/_static/components/top-bar/top-bar.html
   rm -f modules/coursebuilder-student-dashboard/gql.py
+  rm -f modules/coursebuilder-student-dashboard/top-bar.html
 ```
 from your Course Builder directory, run:
  ```sh
