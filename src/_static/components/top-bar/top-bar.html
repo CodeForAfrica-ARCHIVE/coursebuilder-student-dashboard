@@ -2,56 +2,39 @@
 
 <dom-module id="top-bar">
   <template>
-      <!-- NavBar -->
-      <!-- Mobile Nav -->
-      <nav class="home-mobile-nav">
-          <div class="nav-wrapper">
-              <ul class="side-nav" id="mobile-demo">
-                  <li><a href="/" class="mobile-nav-logo"><img
-                          src="/modules/coursebuilder-student-dashboard/_static/images/navbar-logo.png" alt="logo"></a></li>
-
-                  <template is="dom-if" if="[[currentUser.loggedIn]]">
-                    <li>
-                      <a href="/#!explorer" class="waves-effect waves-light btn-large" target="_blank">Keep Learning</a>
-                    </li>
-                  </template>
-
-                  <li><a href="/#!explorer"><i class="material-icons">library_books</i>Courses</a></li>
-
-                  <template is="dom-if" if="[[currentUser.loggedIn]]">
-                      <li>
-                          <div class="divider"></div>
-                      </li>
-                      <template is="dom-if" if="[[currentUser.canViewDashboard]]">
-                          <li><a href="/modules/admin"><i class="material-icons">dashboard</i>Dashboard</a></li>
-                      </template>
-                      <li><a href="[[currentUser.logoutUrl]]"><i class="material-icons">exit_to_app</i>Logout</a></li>
-                  </template>
-              </ul>
-          </div>
-      </nav>
-
-      <!-- Desktop NavBAr -->
-      <div class="navbar-fixed">
-          <nav class="nav-extended">
-            <div class="nav-wrapper pad-5">
-              <a href="/#!home" class="brand-logo"><img src="/modules/coursebuilder-student-dashboard/_static/images/navbar-logo.png" alt="logo"></a>
-              <div class="nav-wrapper home-main-menu pad-5">
-                <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
-                <div class=" navbar-links">
-                  <ul class="left hide-on-med-and-down">
-
-                  <template is="dom-if" if="[[currentUser.loggedIn]]">
-                    <ul class="right hide-on-med-and-down log-out-nav">
-                      <li><a class="log-out-link" href="[[currentUser.logoutUrl]]">LOG OUT</a></li>
-                      <li><a href="/#!explorer" class="waves-effect waves-light btn" target="_blank">Keep Learning</a></li>
-                    </ul>
-                  </template>
-              </div>
-              </div>
-            </div>
-          </nav>
-      </div>
+    <style>
+      /* This top bar utilizes the GCB explorer top bar styles to match the 
+      student dashboard top bar */
+      :host {
+        display: flex;
+        align-items: center;
+        background: #f5f5f5;
+        background-image: -moz-linear-gradient(top,#fafafa,#f5f5f5);
+        background-image: -webkit-linear-gradient(top,#fafafa,#f5f5f5);
+        background-image: -webkit-gradient(linear,left top,left bottom,color-stop(0,#fafafa),color-stop(1,#f5f5f5));
+        filter: "progid:DXImageTransform.Microsoft.gradient(startColorStr=#fafafa,EndColorStr=#f5f5f5)";
+        background-image: linear-gradient(top,#fafafa,#f5f5f5);
+        border-bottom: 1px solid #ebebeb;
+        color: #777;
+        padding-left: 600px;
+        font-size: 15.6px;
+        font-family: arial, sans-serif;
+      }
+      a {
+        color: inherit;
+        text-decoration: underline;
+      }
+      #controls {
+        align-self: flex-start;
+        line-height:3.54;
+      }
+  </style>
+      <div id="controls">
+          <template is="dom-if" if="[[currentUser.loggedIn]]">
+              <a class="log-out-link" href="[[currentUser.logoutUrl]]">LOG OUT</a> |
+              <a class="keep-learning-link" href="/#!explorer" target="_blank">Keep Learning</a>
+          </template>
+      </div> 
   </template>
   <script>
     Polymer({

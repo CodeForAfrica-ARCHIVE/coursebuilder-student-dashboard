@@ -1,46 +1,12 @@
 <link rel="import" href="/static/polymer-1.2.0/polymer/polymer.html">
 <link rel="import" href="/static/polymer-1.2.0/iron-ajax/iron-ajax.html"/>
 <link rel="import" href="/static/polymer-1.2.0/paper-spinner/paper-spinner.html"/>
-<link rel="import" href="/modules/coursebuilder-student-dashboard/_static/components/utility/unsafe-html.html">
-<link rel="import" href="/modules/coursebuilder-student-dashboard/_static/components/utility/floating-sidebar.html">
-<link rel="import" href="/modules/coursebuilder-student-dashboard/_static/components/course-cards/course-card-grouper.html">
-<link rel="import" href="/modules/coursebuilder-student-dashboard/_static/components/filter-sidebar/filter-sidebar.html">
-
-<link rel="import" href="/modules/coursebuilder-student-dashboard/_static/components/pages/homepage.html">
-<link rel="import" href="/modules/coursebuilder-student-dashboard/_static/components/pages/certification.html">
-<link rel="import" href="/modules/coursebuilder-student-dashboard/_static/components/pages/tools-page.html">
-<link rel="import" href="/modules/coursebuilder-student-dashboard/_static/components/pages/feedback-page.html">
-<link rel="import" href="/modules/coursebuilder-student-dashboard/_static/components/pages/help-page.html">
-<link rel="import" href="/modules/coursebuilder-student-dashboard/_static/components/pages/events-page.html">
 <link rel="import" href="/modules/coursebuilder-student-dashboard/_static/student-dashboard.html">
 
 
 <dom-module id="dashboard-wrapper">
     <template> 
-      <home-page current-user="[[currentUser]]"></home-page>
-      <certification-page current-user="[[currentUser]]"></certification-page>
-      <tools-page></tools-page>
-      <feedback-page></feedback-page>
-      <help-page></help-page>
-      <events-page></events-page>   
       <div id="student-dashboard" class="page-wrapper">
-
-      <!--  Top  -->
-      <div class="sd-top">
-        <div class="container">
-          <div class="row">
-            <div class="col l6 m12 sd-top-left">
-              <div class="sd-top-details">
-                <h3>
-                  Learning Goals
-                </h3>
-              </div>
-            </div>
-            <div class="col l6 m12"></div>
-          </div>
-        </div>
-      </div>
-
       <!--   Main  -->
       <div class="container-cards">
         <div class="container section">
