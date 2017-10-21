@@ -30,6 +30,10 @@
       }
   </style>
       <div id="controls">
+          <template is="dom-if" if="[[!currentUser.loggedIn]]">
+              <a class="sign-in-link" href="[[currentUser.loginUrl]]">SIGN IN</a> |
+              <a href="[[currentUser.loginUrl]]" class="start-learning-link">Start Learning</a>
+          </template>
           <template is="dom-if" if="[[currentUser.loggedIn]]">
               <a class="log-out-link" href="[[currentUser.logoutUrl]]">LOG OUT</a> |
               <a class="keep-learning-link" href="/#!explorer" target="_blank">Keep Learning</a>
