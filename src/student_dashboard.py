@@ -12,7 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-"""Course Builder Hello World module.
+"""Course Builder Student dashboard module.
 This module provides examples of two handlers:
 1. GlobalHandler, available at <your_url>:<your_port>/global. This is an example
    of a global handler that is not bound to a particular course.
@@ -27,12 +27,14 @@ Both handlers provide examples of signing the user in, and handling both
 authenticated and unauthenticated users.
 """
 
+
 __author__ = [
     'johncox@google.com (John Cox)',
 ]
 
 import os
 
+import graphql
 from common import jinja_utils
 from controllers import utils
 from models import custom_modules
@@ -78,11 +80,15 @@ custom_module = None
 
 
 def register_module():
+    graphql.register()
+
     # Allow global per CB module pattern.
     global custom_module  # pylint: disable=global-statement
 
     global_handlers = [
         (GlobalHandler.URL, GlobalHandler),
+        (graphql.PrivateGraphQLRestHandler.URL,
+         graphql.PrivateGraphQLRestHandler)
     ]
     namespaced_handlers = [
         (NamespacedHandler.URL, NamespacedHandler),

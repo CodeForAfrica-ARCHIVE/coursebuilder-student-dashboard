@@ -5,13 +5,14 @@
 <link rel="import" href="/modules/coursebuilder-student-dashboard/_static/components/top-bar/top-bar.html">
 
 
+
 <dom-module id="student-dashboard">
   <template>
     <top-bar current-user="[[currentUser]]"></top-bar>
    
     <template is="dom-if" if="[[loadDashboard]]">
       <iron-ajax
-        auto url="/modules/gql/query"
+        auto url="/modules/gql/query/v2"
         params="[[_getDetailedCoursesQuery()]]"
         handle-as="json"
         json-prefix=")]}'"
@@ -38,7 +39,7 @@
       </style>
 
       <iron-ajax
-        auto url="/modules/gql/query"
+        auto url="/modules/gql/query/v2"
         params="[[_getCoursesQuery()]]"
         handle-as="json"
         json-prefix=")]}'"
@@ -46,7 +47,7 @@
       ></iron-ajax>
 
       <iron-ajax
-        auto url="/modules/gql/query"
+        auto url="/modules/gql/query/v2"
         params="[[_getBasicQuery()]]"
         handle-as="json"
         json-prefix=")]}'"
@@ -55,6 +56,19 @@
 
 
       <!--  Courses  -->
+      <div class="section blue-section">
+        <div class="blue-section-inner">
+          <h2>Courses</h2>
+          <p>
+            Much of the instruction material was developed within Africa. The hands-on data
+            journalism training materials that complements Google’s online tutorials were developed
+            and tested in the Sudan and Kenya by the World Bank. The courseware runs alongside
+            repositories of local data (for exercises or projects) and a library of open source
+            software code for easy-to-deploy news apps and visualisations created by Code for Africa
+            teams in Nigeria and Tanzania.
+          </p>
+        </div>
+      </div>
       <div id="main">
         <div id="content">
           <paper-spinner active="{{!coursesLoaded}}"></paper-spinner>
@@ -203,7 +217,7 @@
           query += 'course' + counter + ': course(id:"' + courseId + '"){...courseDetails}';
           counter += 1;
         });
-        query += '} fragment courseDetails on Course {'
+        query += '} fragment courseDetails on PrivateCourse {'
           + 'id, title, url, allUnits{edges{node{title, detailedLessons{edges{node{title, progress, link}}}}}} }';
         return {
           q: query
