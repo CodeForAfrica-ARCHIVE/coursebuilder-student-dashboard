@@ -7,7 +7,6 @@
       <div class="container-cards">
         <div class="container section">
 
-
           <template is="dom-if" if="[[!loaded]]">
             <div class="loading-icon center">
               <div class="preloader-wrapper big active">
@@ -32,23 +31,16 @@
             </template>
 
             <template is="dom-repeat" items="[[dashboardcourses]]" as="course">
-
                 <ul class="collapsible" data-collapsible="accordion">
                   <li>
                     <div class="collapsible-header">
                       <p>[[course.title]]</p>
                     </div>
                     <div class="collapsible-body">
-
-
                       <template is="dom-repeat" items="[[course.allUnits.edges]]" as="unit">
-
                         <div class="row">
                           <div class="col m12 l6">
                             <div class="card horizontal">
-                              <div class="card-image">
-                                <img class=sub-one src="images/course/get_online.png">
-                              </div>
                               <div class="card-stacked">
                                 <div class="card-content">
                                   <p>[[unit.node.title]]</p>
@@ -76,10 +68,10 @@
                   </li>
                 </ul>
               </template>
+              
           </template>
         </div>
       </div>
-
     </div>
   </template>
 

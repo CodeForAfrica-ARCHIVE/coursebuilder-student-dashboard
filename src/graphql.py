@@ -53,17 +53,6 @@ class PrivateLesson(gql.Lesson):
             return None
 
     @classmethod
-    def get_all_lessons(cls, course, course_view, unit):
-        return [
-            cls(
-                course.app_context, unit, lesson,
-                course=course, course_view=course_view,
-                id=cls._get_lesson_id(course, unit, lesson))
-            for lesson in course_view.get_lessons(unit.unit_id)]
-
-    # Getting the detailed lessons is expensive to build, call this method
-    # to get specifics for lessons (e.g the user's progress)
-    @classmethod
     def get_detailed_lessons(cls, course, course_view, unit):
         return [
             cls.get_lesson(cls._get_lesson_id(course, unit, lesson))
