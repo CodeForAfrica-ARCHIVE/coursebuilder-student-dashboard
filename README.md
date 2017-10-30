@@ -36,9 +36,7 @@ Next: create a file titled install.sh. For instance, you can place the file in y
 
   sleep 15 #pause shell script
 
-  cat modules/coursebuilder-student-dashboard/gql.py > modules/gql/gql.py
   cat modules/coursebuilder-student-dashboard/top-bar.html > modules/explorer/_static/components/top-bar/top-bar.html
-  rm -f modules/coursebuilder-student-dashboard/gql.py
   rm -f modules/coursebuilder-student-dashboard/top-bar.html
 ```
 After this process, 
@@ -48,7 +46,7 @@ next run:
   sh ~/Desktop/install.sh
   ```
 
-This script will both download the student dashboard module, replace some course builder components with appropriate components needed for it to work and also link it to Course Builder.
+This script will both download the student dashboard module,install necessary dependencies and also link it to Course Builder.
 
  Now you can start up Course Builder with the student dashboard module installed:
 
@@ -71,7 +69,7 @@ The structure of this module is
     static/              # Handles the module's static files
     templates/           # HTML templates.
     student_dashboard.py # Module handler definitions.
-    gql.py               # GraphQL server support for the student dashboard
+    graphql.py           # GraphQL server support for the student dashboard
     top-bar.html         # Component that contain the student dashboard link
   tests/                 # Module tests.
     functional_tests.py  # Example test file.
@@ -109,9 +107,7 @@ your desktop, copy and paste the script below into it.
   set -e 
   set -o pipefail
 
-  cat modules/coursebuilder-student-dashboard/gql.py > modules/gql/gql.py
   cat modules/coursebuilder-student-dashboard/top-bar.html > modules/explorer/_static/components/top-bar/top-bar.html
-  rm -f modules/coursebuilder-student-dashboard/gql.py
   rm -f modules/coursebuilder-student-dashboard/top-bar.html
 ```
 from your Course Builder directory, run:
