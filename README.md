@@ -25,28 +25,36 @@ Course Builder provides a management script for fetching modules, so you always
 start by grabbing Course Builder, then using it to fetch the module you want to
 work with. Let's grab the student dashboard module, called `coursebuilder-student-dashboard`.
 
-Next: create a file titled install.sh. For instance, you can place the file in your desktop and copy the script below into it.
+Next: run
 
 ```
-  #!/bin/bash
-  set -e 
-  set -o pipefail
   sh scripts/modules.sh \
     --targets=coursebuilder-student-dashboard@https://github.com/andela-iakande/coursebuilder-student-dashboard.git
-
-  sleep 15 #pause shell script
-
-  cat modules/coursebuilder-student-dashboard/top-bar.html > modules/explorer/_static/components/top-bar/top-bar.html
-  rm -f modules/coursebuilder-student-dashboard/top-bar.html
 ```
+This script will both download the student dashboard module,install necessary 
+dependencies and also link it to Course Builder.
+
 After this process, 
-next run:
+next: Locate the path shown below on your Google Course Builder 
 
-  ```sh
-  sh ~/Desktop/install.sh
-  ```
+```
+  modules/explorer/_static/components/top-bar/top-bar.html 
 
-This script will both download the student dashboard module,install necessary dependencies and also link it to Course Builder.
+```
+then add the link indicated below into the template tag wherever 
+you want your student dashboard link to appear.
+         
+```
+  <a href="/student-dashboard">Student Dashboard</a>
+
+```
+
+For instance you can add it in this template :
+
+```
+  <template is="dom-if" if="[[currentUser.loggedIn]]">
+  <template>
+```  
 
  Now you can start up Course Builder with the student dashboard module installed:
 
@@ -99,24 +107,34 @@ To install the module from local disk you need to run this script twice
 in order to fetch the module from your coursebuilder resources into your 
 application.  
 
-then, create a file titled install.sh. For instance, you can place the file in 
-your desktop, copy and paste the script below into it.
+After this process, 
+next: Locate the path shown below on your Google Course Builder 
 
-  ```
-  #!/bin/bash
-  set -e 
-  set -o pipefail
-
-  cat modules/coursebuilder-student-dashboard/top-bar.html > modules/explorer/_static/components/top-bar/top-bar.html
-  rm -f modules/coursebuilder-student-dashboard/top-bar.html
 ```
-from your Course Builder directory, run:
- ```sh
-  sh ~/Desktop/install.sh
- ```
-When you run this script, it updates your coursebuilder with some
-contents required by the student dashboard.
-All other scripts then work as above.
+  modules/explorer/_static/components/top-bar/top-bar.html
+
+```
+then add the link indicated below into the template tag wherever 
+you want your student dashboard link to appear.
+         
+```
+  <a href="/student-dashboard">Student Dashboard</a>
+
+```
+
+For instance you can add it in this template as well just as we have done for 
+the fetching the module from the remote repository :
+
+```
+  <template is="dom-if" if="[[currentUser.loggedIn]]">
+  <template>
+``` 
+
+ Again, you can start up Course Builder with the student dashboard module installed:
+
+  ```sh
+  sh scripts/start_in_shell.sh
+  ```
 
 ## That's it
 
