@@ -1,0 +1,141 @@
+<link rel="import" href="/static/polymer-1.2.0/polymer/polymer.html">
+<link rel="import" href="/static/polymer-1.2.0/iron-ajax/iron-ajax.html"/>
+<link rel="import" href="/static/polymer-1.2.0/paper-spinner/paper-spinner.html"/>
+<link rel="import" href="/modules/coursebuilder-student-dashboard/_static/dashboard-wrapper.html">
+<link rel="import" href="/modules/coursebuilder-student-dashboard/_static/components/top-bar/top-bar.html">
+
+
+<dom-module id="student-dashboard">
+  <template>
+    <top-bar current-user="[[currentUser]]"></top-bar>
+   
+    <template is="dom-if" if="[[loadDashboard]]">
+      <iron-ajax
+        auto url="/modules/gql/query/v2"
+        params="[[_getDetailedCoursesQuery()]]"
+        handle-as="json"
+        json-prefix=")]}'"
+        on-response="_onDetailedCoursesResponse"
+      ></iron-ajax>
+    </template>
+
+    <!-- The wrapper that embeds the student dashboard -->
+    <dashboard-wrapper loaded="[[dashboardLoaded]]" current-user="[[currentUser]]" dashboardcourses="[[dashboardCourses]]">
+    </dashboard-wrapper>
+    
+    <div id="explorer" class="page-wrapper">
+      <iron-ajax
+        auto url="/modules/gql/query/v2"
+        params="[[_getCoursesQuery()]]"
+        handle-as="json"
+        json-prefix=")]}'"
+        on-response="_onCoursesResponse"
+      ></iron-ajax>
+
+      <iron-ajax
+        auto url="/modules/gql/query/v2"
+        params="[[_getBasicQuery()]]"
+        handle-as="json"
+        json-prefix=")]}'"
+        on-response="_onBasicResponse"
+      ></iron-ajax>
+    </div>
+  </template>
+  <script>
+
+    Polymer({
+      is: 'student-dashboard',
+      properties: {
+        dashboardCourses: {
+          type: Array,
+          value: []
+        },
+        dashboardLoaded: {
+          type: Boolean,
+          value: false,
+        },
+        loadDashboard: {
+          type: Boolean,
+          value: false,
+        },
+      },
+
+      _getBasicQuery: function () {
+        return {
+          q: '{site {title, logo {url, altText},' +
+          '  courseExplorer {extraContent}}, ' +
+          'currentUser {' +
+          '  email, loggedIn, canViewDashboard, loginUrl (destUrl: "/student-dashboard"),' +
+          '  logoutUrl (destUrl: "/")}}'
+        }
+      },
+
+      _onBasicResponse: function (event) {
+        this.set('site', event.detail.response.data.site);
+        this.set('currentUser', event.detail.response.data.currentUser);
+      },
+
+      _getCoursesQuery: function () {
+        return {
+          q: '{allCourses {edges {node {' +
+          '  id, title, url, abstract, instructorDetails,' +
+          '  enrollment {enrolled}, openForRegistration, showInExplorer,' +
+          '  startDate, endDate, estimatedWorkload, category {name} }}}}',
+          expanded_gcb_tags: 'gcb-markdown'
+        };
+      },
+
+      _onCoursesResponse: function (event) {
+        var courses = event.detail.response.data.allCourses;
+        var registeredCourseIds = [];
+        courses.edges.forEach(function (course) {
+          if (course.node.enrollment.enrolled === true) {
+            registeredCourseIds.push(course.node.id)
+          }
+        });
+        if (registeredCourseIds.length > 0) {
+          this.set('registeredCourseIds', registeredCourseIds);
+          this.set('loadDashboard', true);
+        } else {
+          this.set('dashboardLoaded', true);
+        }
+      },
+
+      _getDetailedCoursesQuery: function () {
+        var query = '{';
+        var counter = 0;
+        this.get('registeredCourseIds').forEach(function (courseId) {
+          query += 'course' + counter + ': course(id:"' + courseId + '"){...courseDetails}';
+          counter += 1;
+        });
+        query += '} fragment courseDetails on PrivateCourse {'
+          + 'id, title, url, allUnits{edges{node{title, detailedLessons{edges{node{title, progress, link}}}}}} }';
+        return {
+          q: query
+        }
+      },
+
+      _onDetailedCoursesResponse: function (event) {
+        var response = event.detail.response.data;
+        var courses = [];
+        this.get('registeredCourseIds').forEach(function (item, index) {
+          if (response['course' + index]) {
+            courses.push(response['course' + index]);
+          }
+        });
+        this.set('dashboardCourses', courses);
+        this.set('dashboardLoaded', true);
+      },
+
+      _filter: function (courses, filterOptionsPath) {
+        var filterOptions = filterOptionsPath.base;
+        var that = this;
+        return courses.filter(function (course) {
+          if (!course.node.showInExplorer) {
+            return false;
+          }
+        })
+      },
+    })
+  </script>
+</dom-module>

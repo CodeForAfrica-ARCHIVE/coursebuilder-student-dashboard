@@ -1,0 +1,92 @@
+<link rel="import" href="/modules/coursebuilder-student-dashboard/_static/student-dashboard.html">
+
+<dom-module id="dashboard-wrapper">
+    <template> 
+      <div id="student-dashboard" class="page-wrapper">
+      <!--   Main  -->
+      <div class="container-cards">
+        <div class="container section">
+
+          <template is="dom-if" if="[[!loaded]]">
+            <div class="loading-icon center">
+              <div class="preloader-wrapper big active">
+                <div class="spinner-layer spinner-teal-only">
+                  <div class="circle-clipper left">
+                    <div class="circle"></div>
+                  </div>
+                  <div class="gap-patch">
+                    <div class="circle"></div>
+                  </div>
+                  <div class="circle-clipper right">
+                    <div class="circle"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </template>
+
+          <template is="dom-if" if="[[loaded]]">
+            <template is="dom-if" if="[[!_areCoursesAvailable()]]">
+              <h2>No registered courses.</h2>
+            </template>
+
+            <template is="dom-repeat" items="[[dashboardcourses]]" as="course">
+                <ul class="collapsible" data-collapsible="accordion">
+                  <li>
+                    <div class="collapsible-header">
+                      <p>[[course.title]]</p>
+                    </div>
+                    <div class="collapsible-body">
+                      <template is="dom-repeat" items="[[course.allUnits.edges]]" as="unit">
+                        <div class="row">
+                          <div class="col m12 l6">
+                            <div class="card horizontal">
+                              <div class="card-stacked">
+                                <div class="card-content">
+                                  <p>[[unit.node.title]]</p>
+                                  <p>
+                                    <template is="dom-repeat" items="[[unit.node.detailedLessons.edges]]" as="lesson">
+                                      <a href="[[course.url]]/[[lesson.node.link]]">
+                                        <template is="dom-if" if="[[lesson.node.progress]]">
+                                          <i class="material-icons teal-text">check_circle</i>
+                                        </template>
+                                        <template is="dom-if" if="[[!lesson.node.progress]]">
+                                          <i class="material-icons teal-text">radio_button_unchecked</i>
+                                        </template>
+                                      </a>
+                                    </template>
+                                  </p>
+                              </div>
+                              <div class="card-action">
+                                <a class="start-link" href="[[course.url]]">Visit</a>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </template>
+                    </div>
+                  </li>
+                </ul>
+              </template>
+              
+          </template>
+        </div>
+      </div>
+    </div>
+  </template>
+
+  <script>
+    Polymer({
+      is: 'dashboard-wrapper',
+      properties: {
+        currentUser: Object,
+        site: Object,
+        loaded: Boolean,
+        dashboardcourses: Array,
+      },
+      _areCoursesAvailable: function () {
+        return this.get('dashboardcourses').length < 1 ? false : true;
+      },
+    })
+  </script>
+</dom-module>
