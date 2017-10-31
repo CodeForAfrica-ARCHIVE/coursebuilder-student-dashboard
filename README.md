@@ -29,7 +29,7 @@ Next: run
 
 ```
   sh scripts/modules.sh \
-    --targets=coursebuilder-student-dashboard@https://github.com/andela-iakande/coursebuilder-student-dashboard.git
+    --targets=coursebuilder-student-dashboard@https://github.com/CodeForAfricaLabs/coursebuilder-student-dashboard.git
 ```
 This script will both download the student dashboard module,install necessary 
 dependencies and also link it to Course Builder.
